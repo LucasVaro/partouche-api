@@ -1,19 +1,35 @@
 const express = require("express");
-const { welcome } = require("../controllers/controllers.js");
+const path = require("path");
+const { login, register, userMe } = require("../controllers/auth.js");
 const {
-  ExampleController,
-} = require("../controllers/controllerExample/controllerExample.js");
+  createMatch,
+  getMatchs,
+  deleteMatch,
+} = require("../controllers/matchs.js");
+const { authenticateToken } = require("../middleware/jwt");
 const router = express.Router();
 
 router.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Headers", "*");
   next();
 });
 
-router.get("/", welcome);
+router.get("/uploads/logo/:name", (req, res) => {
+  res.sendFile(path.join(__dirname + `/../uploads/logo/${req.params.name}`));
+});
 
-router.post("/routes/routesExample", ExampleController);
+router.post("/auth/login", login);
+
+router.post("/auth/register", register);
+
+router.get("/auth/me", authenticateToken, userMe);
+
+router.post("/match/create", createMatch);
+
+router.post("/match/deleteMatch", deleteMatch);
+
+router.get("/match/getMatchs", getMatchs);
 
 module.exports = router;

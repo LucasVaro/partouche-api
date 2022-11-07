@@ -15,15 +15,15 @@ app.use(bodyParser.json({ limit: "15MB" }));
 
 app.use(router);
 
-const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
 app.use(cors(corsOptions));
 
-const PORT = 8009;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`Connexion au serveur sur le port ${PORT}`);
