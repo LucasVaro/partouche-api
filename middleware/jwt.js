@@ -33,8 +33,8 @@ module.exports = {
       if (!user.isAdmin) {
         return res.status(401).send(err);
       }
-      const getUser = await UsersModel.findOne({ _id: user.id });
-      if (getUser.isAdmin !== true) {
+      const getUser = await UsersModel.findOne({ _id: user._id });
+      if (getUser?.isAdmin !== true) {
         return res.status(401).send(err);
       }
       req.user = user;

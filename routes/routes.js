@@ -6,7 +6,7 @@ const {
   getMatchs,
   deleteMatch,
 } = require("../controllers/matchs.js");
-const { authenticateToken } = require("../middleware/jwt");
+const { authenticateToken, isAdmin } = require("../middleware/jwt");
 const router = express.Router();
 
 router.all("*", function (req, res, next) {
@@ -26,9 +26,9 @@ router.post("/auth/register", register);
 
 router.get("/auth/me", authenticateToken, userMe);
 
-router.post("/match/create", createMatch);
+router.post("/match/create", isAdmin, createMatch);
 
-router.post("/match/deleteMatch", deleteMatch);
+router.post("/match/deleteMatch", isAdmin, deleteMatch);
 
 router.get("/match/getMatchs", getMatchs);
 
