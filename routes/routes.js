@@ -26,9 +26,9 @@ router.post("/auth/register", register);
 
 router.get("/auth/me", authenticateToken, userMe);
 
-router.post("/match/create", authenticateToken, createMatch);
+router.post("/match/create", createMatch);
 
-router.post("/match/deleteMatch", authenticateToken, deleteMatch);
+router.post("/match/deleteMatch", deleteMatch);
 
 router.get("/match/getMatchs", getMatchs);
 
