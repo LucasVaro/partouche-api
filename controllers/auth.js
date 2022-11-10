@@ -72,6 +72,7 @@ module.exports = {
   },
   userMe: async (req, res) => {
     try {
+      console.log("eeeee");
       const getUser = await UsersModel.findOne({ _id: req.user._id });
       res.send({
         id: getUser._id,
