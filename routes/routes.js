@@ -6,6 +6,12 @@ const {
   getMatchs,
   deleteMatch,
 } = require("../controllers/matchs.js");
+
+const {
+  createAnnexe,
+  getAnnexe,
+  deleteAnnexe,
+} = require("../controllers/annexe.js");
 const { authenticateToken, isAdmin } = require("../middleware/jwt");
 const router = express.Router();
 
@@ -31,5 +37,11 @@ router.post("/match/create", isAdmin, createMatch);
 router.post("/match/deleteMatch", isAdmin, deleteMatch);
 
 router.get("/match/getMatchs", getMatchs);
+
+router.post("/annexe/create", isAdmin, createAnnexe);
+
+router.post("/annexe/deleteAnnexe", isAdmin, deleteAnnexe);
+
+router.get("/annexe/getAnnexes", getAnnexe);
 
 module.exports = router;
